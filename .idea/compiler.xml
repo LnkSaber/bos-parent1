@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bos-dao1" />
+        <module name="bos-domain1" />
+        <module name="bos-service1" />
+        <module name="bos-utils1" />
+        <module name="bos-web1" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

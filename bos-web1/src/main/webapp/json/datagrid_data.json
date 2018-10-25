@@ -1,0 +1,6 @@
+[
+		{ "id":"1001",  "name":"用户管理", "age":"page_admin_userlist.action"},
+		{ "id":"1002",  "name":"功能权限管理", "age":"page_admin_function.action"},
+		{ "id":"1003",  "name":"角色管理", "age":"page_admin_role.action"}
+
+]

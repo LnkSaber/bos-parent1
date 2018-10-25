@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.devMode" value="false" />
+	<!-- 
+		<constant name="struts.objectFactory" value="spring"/>
+	 -->
+	<package name="basicstruts2" extends="struts-default">
+		<interceptors>
+			<!-- 注册自定义拦截器  -->
+			<interceptor name="BosLoginInterceptor" class="com.saber.interceptor.BosLoginInterceptor">
+				<!-- 指定那些方法不需要拦截  -->
+				<param name="excludeMethods">login</param>
+			</interceptor>
+			<!-- 定义拦截器栈  -->
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="BosLoginInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		<!--指定拦截器栈-->
+		<default-interceptor-ref name="myStack"/>
+
+		<!--配置全局结果集-->
+		<global-results>
+			<result name="login">/login.jsp</result>
+			<result name="unauthorized">/unauthorized.jsp</result>
+		</global-results>
+
+		<!-- 配置Shiro权限异常获取 -->
+		<global-exception-mappings>
+			<exception-mapping exception="org.apache.shiro.authz.UnauthorizedException" result="unauthorized"></exception-mapping>
+		</global-exception-mappings>
+
+		<!-- 需要进行权限控制的页面访问 -->
+		<action name="page_*_*">
+			<result type="dispatcher">/WEB-INF/pages/{1}/{2}.jsp</result>
+		</action>
+
+        <!-- UserAction -->
+        <action class="userAction" name="userAction_*" method="{1}">
+			<result name="login">/login.jsp</result>
+            <result name="home">/index.jsp</result>
+			<result name="list">/WEB-INF/pages/admin/userlist.jsp</result>
+		</action>
+
+		<!-- 取派员 StaffAction -->
+		<action class="staffAction" name="staffAction_*" method="{1}">
+			<result name="list">/WEB-INF/pages/base/staff.jsp</result>
+		</action>
+
+		<!-- 区域regionAction -->
+		<action class="regionAction" name="regionAction_*" method="{1}">
+		</action>
+
+		<!-- 分区subareaAction -->
+		<action class="subareaAction" name="subareaAction_*" method="{1}">
+			<result name="list">/WEB-INF/pages/base/subarea.jsp</result>
+		</action>
+
+        <!-- 定区decidedzoneAction -->
+        <action class="decidedzoneAction" name="decidedzoneAction_*" method="{1}">
+            <result name="list">/WEB-INF/pages/base/decidedzone.jsp</result>
+        </action>
+
+		<!-- 业务通知单noticebillAction -->
+		<action class="noticebillAction" name="noticebillAction_*" method="{1}">
+		</action>
+
+		<!-- 工单WorkodermnagageAction -->
+		<action class="workodermnagageAction" name="workodermnagageAction_*" method="{1}">
+		</action>
+
+		<!-- 权限funcationAction -->
+		<action class="functionAction" name="functionAction_*" method="{1}">
+			<result name="list">/WEB-INF/pages/admin/function_add.jsp</result>
+		</action>
+
+		<!--角色roleAction -->
+		<action class="roleAction" name="roleAction_*" method="{1}">
+			<result name="list">/WEB-INF/pages/admin/role_add.jsp</result>
+		</action>
+
+	</package>
+
+</struts>
